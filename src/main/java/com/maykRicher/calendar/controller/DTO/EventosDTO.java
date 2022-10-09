@@ -1,74 +1,53 @@
 package com.maykRicher.calendar.controller.DTO;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonInclude;
 import com.maykRicher.calendar.model.Eventos;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import org.springframework.format.annotation.DateTimeFormat;
 
-import javax.persistence.Column;
-import javax.persistence.Id;
-import java.time.LocalDateTime;
+import javax.validation.constraints.NotEmpty;
 
-@JsonInclude(JsonInclude.Include.NON_NULL)
+@Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+
 public class EventosDTO {
 
         private Integer id;
-
+        @NotEmpty
+        @DateTimeFormat(pattern = "dd/MM/yyyy")
         private String dataInicio;
+        @JsonFormat(pattern = "dd/MM/yyyy")
         private String dataFim;
-        @JsonFormat(pattern = "dd/MM/yyyy HH:mm")
-        private LocalDateTime dataInicioDate;
-        @JsonFormat(pattern = "dd/MM/yyyy HH:mm")
-        private LocalDateTime dataFimDate;
+
+//        private LocalDateTime dataInicioDate;
+//
+//        private LocalDateTime dataFimDate;
 
         public EventosDTO(Eventos obj) {
-                this.id= obj.getId();
                 this.dataInicio= obj.getDataInicio();
                 this.dataFim= obj.getDataFim();
-                this.dataInicioDate= obj.getDataInicioDate();
-                this.dataFimDate= obj.getDataFimDate();
+
         }
 
 
-        public EventosDTO() {
-        }
-
-        public Integer getId() {
-                return id;
-        }
-
-        public void setId(Integer id) {
-                this.id = id;
-        }
-
-        public String getDataInicio() {
-                return dataInicio;
-        }
-
-        public void setDataInicio(String dataInicio) {
-                this.dataInicio = dataInicio;
-        }
-
-        public String getDataFim() {
-                return dataFim;
-        }
-
-        public void setDataFim(String dataFim) {
-                this.dataFim = dataFim;
-        }
-
-        public LocalDateTime getDataInicioDate() {
-                return dataInicioDate;
-        }
-
-        public void setDataInicioDate(LocalDateTime dataInicioDate) {
-                this.dataInicioDate = dataInicioDate;
-        }
-
-        public LocalDateTime getDataFimDate() {
-                return dataFimDate;
-        }
-
-        public void setDataFimDate(LocalDateTime dataFimDate) {
-                this.dataFimDate = dataFimDate;
-        }
+//        public LocalDateTime getDataInicioDate() {
+//                return dataInicioDate;
+//        }
+//
+//        public void setDataInicioDate(LocalDateTime dataInicioDate) {
+//                this.dataInicioDate = dataInicioDate;
+//        }
+//
+//        public LocalDateTime getDataFimDate() {
+//                return dataFimDate;
+//        }
+//
+//        public void setDataFimDate(LocalDateTime dataFimDate) {
+//                this.dataFimDate = dataFimDate;
+//        }
 }

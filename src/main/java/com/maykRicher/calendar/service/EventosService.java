@@ -24,5 +24,10 @@ public class EventosService {
         return repository.findAll();
     }
 
+    public Eventos createEventos(Eventos eventos){
+        repository.save(eventos);
+        return eventos;
+    }
+
 
 }
