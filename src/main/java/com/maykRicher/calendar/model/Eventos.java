@@ -1,34 +1,30 @@
 package com.maykRicher.calendar.model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import java.time.LocalDateTime;
-import java.util.Date;
+
+import javax.persistence.*;
+import java.io.Serializable;
 
 @Entity
-public class Eventos {
+public class Eventos implements Serializable {
+    private static final long serialVersionUID = 1L;
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
+    @Column
     private String dataInicio;
     private String dataFim;
-    private LocalDateTime dataInicioDate;
-    private LocalDateTime dataFimDate;
+
 
     public Eventos() {
+        super();
     }
 
     public Eventos(Integer id, String dataInicio, String dataFim) {
+        super();
         this.id = id;
         this.dataInicio = dataInicio;
         this.dataFim = dataFim;
-    }
-
-    public Eventos(Integer id, LocalDateTime dataInicioDate, LocalDateTime dataFimDate) {
-        this.id = id;
-        this.dataInicioDate = dataInicioDate;
-        this.dataFimDate = dataFimDate;
     }
 
     public Integer getId() {
@@ -55,19 +51,5 @@ public class Eventos {
         this.dataFim = dataFim;
     }
 
-    public LocalDateTime getDataInicioDate() {
-        return dataInicioDate;
-    }
 
-    public void setDataInicioDate(LocalDateTime dataInicioDate) {
-        this.dataInicioDate = dataInicioDate;
-    }
-
-    public LocalDateTime getDataFimDate() {
-        return dataFimDate;
-    }
-
-    public void setDataFimDate(LocalDateTime dataFimDate) {
-        this.dataFimDate = dataFimDate;
-    }
 }

@@ -3,72 +3,62 @@ package com.maykRicher.calendar.controller.DTO;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.maykRicher.calendar.model.Eventos;
+import org.springframework.format.annotation.DateTimeFormat;
 
-import javax.persistence.Column;
-import javax.persistence.Id;
-import java.time.LocalDateTime;
+import javax.validation.Valid;
+import javax.validation.constraints.NotEmpty;
+import java.io.Serializable;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class EventosDTO {
+public class EventosDTO implements Serializable {
+    private static final long serialVersionUID = 1L;
 
-        private Integer id;
+    private Integer id;
 
-        private String dataInicio;
-        private String dataFim;
-        @JsonFormat(pattern = "dd/MM/yyyy HH:mm")
-        private LocalDateTime dataInicioDate;
-        @JsonFormat(pattern = "dd/MM/yyyy HH:mm")
-        private LocalDateTime dataFimDate;
-
-        public EventosDTO(Eventos obj) {
-                this.id= obj.getId();
-                this.dataInicio= obj.getDataInicio();
-                this.dataFim= obj.getDataFim();
-                this.dataInicioDate= obj.getDataInicioDate();
-                this.dataFimDate= obj.getDataFimDate();
-        }
+    // @JsonFormat(pattern = "dd/MM/yyyy HH:mm")
+    @DateTimeFormat(pattern = "dd/MM/yyyy")
+    @Valid
+    private String dataInicio;
+    @DateTimeFormat(pattern = "dd/MM/yyyy")
+    @Valid
+    private String dataFim;
 
 
-        public EventosDTO() {
-        }
+    public EventosDTO(Eventos obj) {
+        super();
+        this.id = obj.getId();
+        this.dataInicio = obj.getDataInicio();
+        this.dataFim = obj.getDataFim();
 
-        public Integer getId() {
-                return id;
-        }
+    }
 
-        public void setId(Integer id) {
-                this.id = id;
-        }
+    public EventosDTO() {
+        super();
+    }
 
-        public String getDataInicio() {
-                return dataInicio;
-        }
+    public Integer getId() {
+        return id;
+    }
 
-        public void setDataInicio(String dataInicio) {
-                this.dataInicio = dataInicio;
-        }
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
-        public String getDataFim() {
-                return dataFim;
-        }
+    public String getDataInicio() {
+        return dataInicio;
+    }
 
-        public void setDataFim(String dataFim) {
-                this.dataFim = dataFim;
-        }
+    public void setDataInicio(String dataInicio) {
+        this.dataInicio = dataInicio;
+    }
 
-        public LocalDateTime getDataInicioDate() {
-                return dataInicioDate;
-        }
+    public String getDataFim() {
+        return dataFim;
+    }
 
-        public void setDataInicioDate(LocalDateTime dataInicioDate) {
-                this.dataInicioDate = dataInicioDate;
-        }
+    public void setDataFim(String dataFim) {
+        this.dataFim = dataFim;
+    }
 
-        public LocalDateTime getDataFimDate() {
-                return dataFimDate;
-        }
 
-        public void setDataFimDate(LocalDateTime dataFimDate) {
-                this.dataFimDate = dataFimDate;
-        }
 }
