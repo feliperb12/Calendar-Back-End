@@ -9,4 +9,5 @@ public class EventoNotFoundException extends RuntimeException {
         super("Evento não foi encontrado com o Id:" + id);
     }
 
+
 }
