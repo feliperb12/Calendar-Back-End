@@ -1,6 +1,8 @@
 package com.maykRicher.calendar.controller;
 
+import com.maykRicher.calendar.controller.DTO.EventosCreateDTO;
 import com.maykRicher.calendar.controller.DTO.EventosDTO;
+import com.maykRicher.calendar.controller.mapper.EventosMapper;
 import com.maykRicher.calendar.model.Eventos;
 import com.maykRicher.calendar.service.EventosService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +10,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
+
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.validation.Valid;
@@ -44,12 +49,12 @@ public class EventosController {
     public ResponseEntity<Void> delete(@PathVariable Integer id) {
         service.delete(id);
         return ResponseEntity.noContent().build();
-        }
+    }
 
     @PutMapping(value = "/{id}")
     public ResponseEntity<EventosDTO> update(@Valid @PathVariable Integer id, @RequestBody  EventosDTO obj){
         Eventos newObj = service.update(id,obj);
         return ResponseEntity.ok().body(new EventosDTO(newObj));
     }
-    }
+}
 
