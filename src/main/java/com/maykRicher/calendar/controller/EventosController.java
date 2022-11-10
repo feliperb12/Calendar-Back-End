@@ -1,9 +1,13 @@
 package com.maykRicher.calendar.controller;
 
+import com.maykRicher.calendar.controller.DTO.ContasCreateDTO;
+import com.maykRicher.calendar.controller.DTO.ContasDTO;
 import com.maykRicher.calendar.controller.DTO.EventosCreateDTO;
 import com.maykRicher.calendar.controller.DTO.EventosDTO;
 import com.maykRicher.calendar.controller.mapper.EventosMapper;
+import com.maykRicher.calendar.model.Contas;
 import com.maykRicher.calendar.model.Eventos;
+import com.maykRicher.calendar.repository.EventosRepository;
 import com.maykRicher.calendar.service.EventosService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -26,6 +30,12 @@ public class EventosController {
     @Autowired
     private EventosService service;
 
+    @Autowired
+    private EventosMapper mapper;
+
+    @Autowired
+    private EventosRepository repository;
+
     @GetMapping("/{id}")
     public ResponseEntity<Eventos> findById(@PathVariable Integer id){
         Eventos obj = service.findById(id);
@@ -39,11 +49,18 @@ public class EventosController {
     }
     @PostMapping
     public ResponseEntity<EventosDTO> create(@RequestBody @Valid EventosDTO obj) {
-        Eventos newObj = service.createEvento(obj);
+        /*Eventos newObj = service.createEvento(obj);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
                 .path("/{id}").buildAndExpand(newObj.getId()).toUri();
-        return ResponseEntity.created(uri).build();
+        return ResponseEntity.created(uri).build();*/
+
+        var eventosCreate = mapper.toEventosCreate(obj);
+        var evento = service.create(eventosCreate);
+        var result = mapper.toEventosDTO(evento);
+        return ResponseEntity.status(HttpStatus.CREATED).body(result);
     }
+
+
 
     @DeleteMapping(value = "/{id}")
     public ResponseEntity<Void> delete(@PathVariable Integer id) {
@@ -53,8 +70,10 @@ public class EventosController {
 
     @PutMapping(value = "/{id}")
     public ResponseEntity<EventosDTO> update(@Valid @PathVariable Integer id, @RequestBody  EventosDTO obj){
-        Eventos newObj = service.update(id,obj);
-        return ResponseEntity.ok().body(new EventosDTO(newObj));
+        Eventos contasUpdate = mapper.toEventosCreate(obj);
+        Eventos eventos = service.update(id, contasUpdate);
+        return ResponseEntity.ok().body(new EventosDTO(eventos));
     }
+
 }
 

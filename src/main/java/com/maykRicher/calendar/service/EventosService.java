@@ -25,10 +25,8 @@ public class EventosService {
         return repository.findAll();
     }
 
-    public Eventos createEvento(EventosDTO objDTO){
-        return repository.save(new Eventos(null,
-                objDTO.getDataInicio(),
-                objDTO.getDataFim()));
+    public Eventos create(Eventos objDTO){
+        return repository.save(objDTO);
     }
 
     public void delete(Integer idObj){
@@ -36,10 +34,10 @@ public class EventosService {
         repository.deleteById(idObj);
     }
 
-    public Eventos update(Integer id, EventosDTO objDTO){
+    public Eventos update(Integer id, Eventos objDTO){
         Eventos obj= findById(id);
-        obj.setDataInicio(objDTO.getDataInicio());
-        obj.setDataFim(objDTO.getDataFim());
+        obj.setTitle(objDTO.getTitle());
+        obj.setStart(objDTO.getStart());
         return repository.save(obj);
     }
 

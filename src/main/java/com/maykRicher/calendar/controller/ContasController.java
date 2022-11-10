@@ -38,7 +38,7 @@ public class ContasController {
         return ResponseEntity.status(HttpStatus.CREATED).body(result);
     }
 
-    @GetMapping("/")
+    @GetMapping
     public ResponseEntity<List<ContasDTO>> findAll() {
             List<Contas> contasList = contasService.findAll();
             List<ContasDTO> result = contasMapper.toContasDTOList(contasList);
@@ -51,9 +51,15 @@ public class ContasController {
         ContasDTO contasDTO = contasMapper.toContasDTO(contas);
         return ResponseEntity.ok(contasDTO);
     }
-    
-    @GetMapping("/filter")
-    public ResponseEntity<List<ContasDTO>> findByMes(@RequestParam("mes") Integer mes) {
+
+    @GetMapping("/valorTotal/{id}")
+    public ResponseEntity<Float> valores(@PathVariable Integer id){
+        Float resultado = contasService.valoresConta(id);
+        return ResponseEntity.ok(resultado);
+    }
+
+    @GetMapping("/mes/{mes}")
+    public ResponseEntity<List<ContasDTO>> findByMes(@PathVariable Integer mes) {
         List<Contas> contasList = contasService.findByMes(mes);
         List<ContasDTO> result = contasMapper.toContasDTOList(contasList);
         return ResponseEntity.ok(result);

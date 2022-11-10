@@ -37,6 +37,16 @@ public class ContasService {
         return repository.findByMes(mes);
     }
 
+    public Float valoresConta(Integer id) {
+        List<Contas> contas = findByMes(id);
+        float valor = 0;
+        for (Contas conta: contas){
+            valor += conta.getValor();
+        }
+        return valor;
+    }
+
+
     public void delete(Integer id) {
         findById(id);
         repository.deleteById(id);

@@ -3,11 +3,10 @@ package com.maykRicher.calendar.controller.DTO;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.maykRicher.calendar.model.Eventos;
-import org.springframework.format.annotation.DateTimeFormat;
 
-import javax.validation.Valid;
-import javax.validation.constraints.NotEmpty;
 import java.io.Serializable;
+import java.time.LocalDateTime;
+import java.util.Date;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class EventosDTO implements Serializable {
@@ -15,20 +14,16 @@ public class EventosDTO implements Serializable {
 
     private Integer id;
 
-    // @JsonFormat(pattern = "dd/MM/yyyy HH:mm")
-    @DateTimeFormat(pattern = "dd/MM/yyyy")
-    @Valid
-    private String dataInicio;
-    @DateTimeFormat(pattern = "dd/MM/yyyy")
-    @Valid
-    private String dataFim;
+    private String title;
+   // @JsonFormat(pattern = "dd-MM-yyyy")
+    private Date start;
 
 
     public EventosDTO(Eventos obj) {
         super();
         this.id = obj.getId();
-        this.dataInicio = obj.getDataInicio();
-        this.dataFim = obj.getDataFim();
+        this.start = obj.getStart();
+        this.title= obj.getTitle();
 
     }
 
@@ -44,21 +39,19 @@ public class EventosDTO implements Serializable {
         this.id = id;
     }
 
-    public String getDataInicio() {
-        return dataInicio;
+    public String getTitle() {
+        return title;
     }
 
-    public void setDataInicio(String dataInicio) {
-        this.dataInicio = dataInicio;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
-    public String getDataFim() {
-        return dataFim;
+    public Date getStart() {
+        return start;
     }
 
-    public void setDataFim(String dataFim) {
-        this.dataFim = dataFim;
+    public void setStart(Date start) {
+        this.start = start;
     }
-
-
 }

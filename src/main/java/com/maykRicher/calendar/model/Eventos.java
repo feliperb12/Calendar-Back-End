@@ -3,6 +3,8 @@ package com.maykRicher.calendar.model;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.time.LocalDateTime;
+import java.util.Date;
 
 @Entity
 public class Eventos implements Serializable {
@@ -10,21 +12,19 @@ public class Eventos implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-
     @Column
-    private String dataInicio;
-    private String dataFim;
-
+    private Date start;
+    private String title;
 
     public Eventos() {
         super();
     }
-
-    public Eventos(Integer id, String dataInicio, String dataFim) {
+    public Eventos(Integer id, String title, Date start) {
         super();
         this.id = id;
-        this.dataInicio = dataInicio;
-        this.dataFim = dataFim;
+        this.title = title;
+        this.start = start;
+
     }
 
     public Integer getId() {
@@ -35,21 +35,19 @@ public class Eventos implements Serializable {
         this.id = id;
     }
 
-    public String getDataInicio() {
-        return dataInicio;
+    public Date getStart() {
+        return start;
     }
 
-    public void setDataInicio(String dataInicio) {
-        this.dataInicio = dataInicio;
+    public void setStart(Date start) {
+        this.start = start;
     }
 
-    public String getDataFim() {
-        return dataFim;
+    public String getTitle() {
+        return title;
     }
 
-    public void setDataFim(String dataFim) {
-        this.dataFim = dataFim;
+    public void setTitle(String title) {
+        this.title = title;
     }
-
-
 }
